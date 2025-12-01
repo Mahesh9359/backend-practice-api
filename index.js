@@ -39,6 +39,12 @@ const ITEMS = [
     updatedAt: new Date().toISOString(),
   },
 ];
+app.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "Server is healthy",
+  });
+});
 
 app.get("/items", (req, res) => {
   res.json({
@@ -72,6 +78,7 @@ app.post("/items", (req, res) => {
     message: "Item created successfully",
   });
 });
+
 app.get("/items/search", (req, res) => {
   const { brand, price } = req.query;
 
@@ -146,8 +153,8 @@ app.patch("/items/:id", (req, res) => {
   const updatedFields = req.body;
 
   ITEMS[index] = {
-    ...ITEMS[index],        
-    ...updatedFields,      
+    ...ITEMS[index],
+    ...updatedFields,
     updatedAt: new Date().toISOString(),
   };
 
@@ -157,7 +164,6 @@ app.patch("/items/:id", (req, res) => {
     message: "Item updated successfully",
   });
 });
-
 
 app.put("/items/:id", (req, res) => {
   const { id } = req.params;
